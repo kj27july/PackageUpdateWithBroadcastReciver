@@ -8,42 +8,65 @@ import android.util.Log
 import android.widget.Toast
 
 class PackageAction {
-
     companion object {
-
         lateinit var mContext: Context
-        lateinit var reciver: BroadcastReceiver
-        var filter:IntentFilter?=null
-        fun sendContext(context: Context) {
+        lateinit var reciver:BroadcastReceiver
+    }
 
-            mContext = context
 
-            filter = IntentFilter()
-            filter!!.addAction(Intent.ACTION_PACKAGE_ADDED)
-            filter!!.addAction(Intent.ACTION_PACKAGE_REMOVED)
-            filter!!.addDataScheme("package");
+    fun start() {
+//        mContext.getApplicationContext().registerReceiver(reciver,filter)
+    }
 
-             reciver=object : BroadcastReceiver(){
-                override fun onReceive(context: Context?, intent: Intent?) {
-                    Toast.makeText(context, intent?.action, Toast.LENGTH_LONG).show()
-                    Log.d("kajal",intent?.action!!)
-                }
 
+
+    fun sendContext(context: Context) {
+        mContext = context
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED)
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED)
+        filter.addDataScheme("package");
+
+         reciver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                Toast.makeText(context, intent?.action, Toast.LENGTH_LONG).show()
+                Log.d("kajal", intent?.action!!)
             }
-
-
         }
-
+        mContext.applicationContext.registerReceiver(reciver, filter)
 
     }
-
-
-    fun start(){
-        mContext.getApplicationContext().registerReceiver(reciver,filter)
+    fun stop() {
+        mContext.getApplicationContext().unregisterReceiver(reciver)
     }
-   fun stop(){
-       mContext.getApplicationContext().unregisterReceiver(reciver)
-   }
-
 
 }
+
+
+//companion object {
+//
+//    lateinit var mContext: Context
+//    lateinit var reciver: BroadcastReceiver
+//    var filter:IntentFilter?=null
+//    fun sendContext(context: Context) {
+//
+//        mContext = context
+//
+//        filter = IntentFilter()
+//        filter!!.addAction(Intent.ACTION_PACKAGE_ADDED)
+//        filter!!.addAction(Intent.ACTION_PACKAGE_REMOVED)
+//        filter!!.addDataScheme("package");
+//
+//        reciver=object : BroadcastReceiver(){
+//            override fun onReceive(context: Context?, intent: Intent?) {
+//                Toast.makeText(context, intent?.action, Toast.LENGTH_LONG).show()
+//                Log.d("kajal",intent?.action!!)
+//            }
+//
+//        }
+//
+//
+//    }
+//
+//
+//}

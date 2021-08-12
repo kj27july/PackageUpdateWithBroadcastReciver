@@ -16,22 +16,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_PACKAGE_ADDED)
-        filter.addAction(Intent.ACTION_PACKAGE_REMOVED)
-        filter.addDataScheme("package");
+PackageAction().sendContext(this)
+//        PackageAction().
 
-        val reciver=object : BroadcastReceiver(){
-            override fun onReceive(context: Context?, intent: Intent?) {
-                Toast.makeText(context, intent?.action, Toast.LENGTH_LONG).show()
-                Log.d("kajal",intent?.action!!)
-            }
-        }
-        registerReceiver(reciver,filter)
+//        val filter = IntentFilter()
+//        filter.addAction(Intent.ACTION_PACKAGE_ADDED)
+//        filter.addAction(Intent.ACTION_PACKAGE_REMOVED)
+//        filter.addDataScheme("package");
+//
+//        val reciver=object : BroadcastReceiver(){
+//            override fun onReceive(context: Context?, intent: Intent?) {
+//                Toast.makeText(context, intent?.action, Toast.LENGTH_LONG).show()
+//                Log.d("kajal",intent?.action!!)
+//            }
+//        }
+//        registerReceiver(reciver,filter)
     }
 
-    override fun onDestroy() {
-        unregisterReceiver(reciver)
-        super.onDestroy()
-    }
+//    override fun onDestroy() {
+//        unregisterReceiver(reciver)
+//        super.onDestroy()
+//    }
 }
